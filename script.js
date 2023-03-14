@@ -10,13 +10,18 @@ class Square {
 
     draw() {
         this.ctx.strokeStyle = 'black'
+        this.ctx.shadowBlur = 30
+        this.ctx.shadowColor = 'black'
+        this.ctx.lineWidth = 7
         this.ctx.strokeRect(this.x, this.y, this.width, this.height)
 
         if(this.actor) {
             this.ctx.fillStyle = 'black'
-            this.ctx.font = '60px Arial'
+            this.ctx.font = '80px Arial'
             this.ctx.textAlign = 'center'
-            this.ctx.fillText(this.actor, this.x + this.width / 2, this.y + this.height / 2 + 10)
+            this.ctx.shadowBlur = 30
+            this.ctx.shadowColor = 'black'
+            this.ctx.fillText(this.actor, this.x + this.width / 2, this.y + this.height / 2 + 30)
         }
     }
 }
@@ -36,7 +41,7 @@ class TicTacToe {
             }
         }
 
-        this.actors = ['x', 'o']
+        this.actors = ['X', 'O']
         this.turn = 0
         this.gameOver = false
         this.squares.forEach(squares => squares.draw())
@@ -58,6 +63,8 @@ class TicTacToe {
             if(square.actor != null) continue
             if(x >= square.x && x <= square.x + square.width && y >= square.y && y <= square.y + square.height) {
                 square.actor = this.actors[this.turn]
+                this.ctx.shadowBlur = 30
+                this.ctx.shadowColor = 'black'
                 square.draw()
 
                 this.turn = (this.turn + 1) % this.actors.length
@@ -91,13 +98,15 @@ class TicTacToe {
                     this.ctx.beginPath()
                     this.ctx.moveTo(s1.x + s1.width / 2, s1.y + s1.height / 2)
                     this.ctx.lineTo(s3.x + s3.width / 2, s3.y + s3.height / 2)
-                    this.ctx.lineWidth = 5
+                    this.ctx.lineWidth = 7
                     this.ctx.stroke()
 
-                    this.ctx.fillStyle = 'red'
-                    this.ctx.font = '60px Arial'
+                    this.ctx.fillStyle = 'white'
+                    this.ctx.font = '80px Arial'
                     this.ctx.textAlign = 'center'
-                    this.ctx.fillText(s1.actor + ' wins!', this.canvas.width / 2, this.canvas.height / 2)
+                    this.ctx.shadowBlur = 30
+                    this.ctx.shadowColor = 'black'
+                    this.ctx.fillText(s1.actor + ' Wins!', this.canvas.width / 2, this.canvas.height / 2 + 20)
                 }
             }
         }
@@ -105,9 +114,11 @@ class TicTacToe {
         if(!this.gameOver && this.squares.filter(square => square.actor == null).length == 0) {
             this.gameOver = true
             this.ctx.fillStyle = 'red'
-            this.ctx.font = '60px Arial'
+            this.ctx.font = '80px Arial'
             this.ctx.textAlign = 'center'
-            this.ctx.fillText('Draw!', this.canvas.width / 2, this.canvas.height / 2)
+            this.ctx.shadowBlur = 30
+            this.ctx.shadowColor = 'black'
+            this.ctx.fillText('Draw!', this.canvas.width / 2, this.canvas.height / 2 + 20)
         }
     }
 
